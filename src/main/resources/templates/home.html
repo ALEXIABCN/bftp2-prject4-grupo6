@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
-<head></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
 <body>
-<header>Legacygames</header>
-<section class="container">
-    <h2>Bienvenido a mi pagina</h2>
-</section>
-<footer>Pie de página</footer>
+<header th:replace="fragments/header"></header>
+<section class="container"><h2>Welcome to Legacy Games</h2></section>
+<footer th:replace="fragments/footer"></footer>
 </body>
 </html>
