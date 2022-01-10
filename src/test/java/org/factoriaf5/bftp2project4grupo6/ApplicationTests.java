@@ -44,4 +44,10 @@ class ApplicationTests {
                 .andExpect(view().name("games/all"))
                 .andExpect(model().attribute("games", hasItem(game)));
     }
+    @Test
+    void returnsAFormToAddNewGames() throws Exception {
+        mockMvc.perform(get("/games/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("games/new"));
+    }
 }
