@@ -5,9 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import repositories.Game;
-import repositories.GameRepository;
+import org.factoriaf5.bftp2project4grupo6.repositories.Game;
+import org.factoriaf5.bftp2project4grupo6.repositories.GameRepository;
 
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -30,7 +31,7 @@ class ApplicationTests {
     @Test
     void returnsTheExistingGames() throws Exception {
 
-        Game game = gameRepository.save(new Game("Call of duty", "Accion"));
+        Game game = gameRepository.save(new Game("Call of duty", "19,99","Accion"));
 
         mockMvc.perform(get("/games"))
                 .andExpect(status().isOk())

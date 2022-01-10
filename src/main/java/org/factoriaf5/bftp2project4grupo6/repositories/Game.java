@@ -1,4 +1,4 @@
-package repositories;
+package org.factoriaf5.bftp2project4grupo6.repositories;
 
 import javax.persistence.*;
 import java.io.Serializable;
