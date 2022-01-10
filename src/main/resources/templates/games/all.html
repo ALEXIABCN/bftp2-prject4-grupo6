@@ -6,7 +6,24 @@
 <header th:replace="fragments/header"></header>
 <section class="container">
     <h1 th:text="${title}"></h1>
-    <p th:text="${games}"></p>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="game: ${games}">
+            <th scope="row" th:text="${game.id}"></th>
+            <td th:text="${game.title}"></td>
+            <td th:text="${game.price}"></td>
+            <td th:text="${game.category}"></td>
+        </tr>
+        </tbody>
+    </table>
 </section>
 <footer th:replace="fragments/footer"></footer>
 </body>
