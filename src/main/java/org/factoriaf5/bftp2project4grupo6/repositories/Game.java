@@ -66,15 +66,15 @@ import java.util.Objects;
             this.category = category;
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Game game = (Game) o;
-            return Objects.equals(id, game.id) && Objects.equals(title, game.title) && Objects.equals(price, game.price) && Objects.equals(category, game.category);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return Objects.equals(id, game.id) && Objects.equals(title, game.title) && Objects.equals(price, game.price) && Objects.equals(category, game.category);
+    }
 
-        @Override
+    @Override
         public int hashCode() {
             return Objects.hash(id, title, price, category);
         }

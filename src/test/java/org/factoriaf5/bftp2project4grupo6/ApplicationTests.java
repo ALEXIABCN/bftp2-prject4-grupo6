@@ -9,8 +9,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.factoriaf5.bftp2project4grupo6.repositories.Game;
 import org.factoriaf5.bftp2project4grupo6.repositories.GameRepository;
 
-import static org.hamcrest.Matchers.hasItem;
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -53,12 +57,12 @@ class ApplicationTests {
 
     @Test
     void allowsToCreateANewGame() throws Exception {
-        mockMvc.perform(post("/game/new")
+        mockMvc.perform(post("/games/new")
                         .param("title", "Wii Sports")
                         .param("price", "19,99")
                         .param("category", "sports")
                 )
-                .andExpect(status().is3xxRedirection())
+                .andExpect(status().isOk())
                 .andExpect(redirectedUrl("/games"))
         ;
 
