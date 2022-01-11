@@ -53,20 +53,20 @@ class ApplicationTests {
 
     @Test
     void allowsToCreateANewGame() throws Exception {
-        mockMvc.perform(post("/books/new")
-                        .param("title", "Harry Potter and the Philosopher's Stone")
-                        .param("author", "J.K. Rowling")
-                        .param("category", "fantasy")
+        mockMvc.perform(post("/game/new")
+                        .param("title", "Wii Sports")
+                        .param("price", "19,99")
+                        .param("category", "sports")
                 )
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/books"))
+                .andExpect(redirectedUrl("/games"))
         ;
 
-        List<Book> existingBooks = (List<Book>) bookRepository.findAll();
-        assertThat(existingBooks, contains(allOf(
-                hasProperty("title", equalTo("Harry Potter and the Philosopher's Stone")),
-                hasProperty("author", equalTo("J.K. Rowling")),
-                hasProperty("category", equalTo("fantasy"))
+        List<Game> existingGames = (List<Game>) gameRepository.findAll();
+        assertThat(existingGames, contains(allOf(
+                hasProperty("title", equalTo("Wii Sports")),
+                hasProperty("price", equalTo("19,99")),
+                hasProperty("category", equalTo("sports"))
         )));
     }
 }

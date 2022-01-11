@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.factoriaf5.bftp2project4grupo6.repositories.Game;
 import org.factoriaf5.bftp2project4grupo6.repositories.GameRepository;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -31,5 +33,10 @@ public class GameController {
         Game game = new Game();
         model.addAttribute("game", game);
         return "games/new";
+    }
+    @PostMapping("/games/new")
+    String addGame(@ModelAttribute Game game) {
+        gameRepository.save(game);
+        return "redirect:/games";
     }
 }
