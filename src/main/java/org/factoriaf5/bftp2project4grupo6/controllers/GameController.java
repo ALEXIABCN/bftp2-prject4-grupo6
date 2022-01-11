@@ -28,6 +28,8 @@ public class GameController {
     }
     @GetMapping("/games/new")
     String getForm(Model model) {
+        Game game = new Game();
+        model.addAttribute("game", game);
         return "games/new";
     }
 }

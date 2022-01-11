@@ -50,4 +50,23 @@ class ApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(view().name("games/new"));
     }
+
+    @Test
+    void allowsToCreateANewGame() throws Exception {
+        mockMvc.perform(post("/books/new")
+                        .param("title", "Harry Potter and the Philosopher's Stone")
+                        .param("author", "J.K. Rowling")
+                        .param("category", "fantasy")
+                )
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/books"))
+        ;
+
+        List<Book> existingBooks = (List<Book>) bookRepository.findAll();
+        assertThat(existingBooks, contains(allOf(
+                hasProperty("title", equalTo("Harry Potter and the Philosopher's Stone")),
+                hasProperty("author", equalTo("J.K. Rowling")),
+                hasProperty("category", equalTo("fantasy"))
+        )));
+    }
 }
