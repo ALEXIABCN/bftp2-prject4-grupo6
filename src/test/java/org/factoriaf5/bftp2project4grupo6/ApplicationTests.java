@@ -48,12 +48,7 @@ class ApplicationTests {
                 .andExpect(view().name("games/all"))
                 .andExpect(model().attribute("games", hasItem(game)));
     }
-    @Test
-    void returnsAFormToAddNewGames() throws Exception {
-        mockMvc.perform(get("/games/new"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("games/new"));
-    }
+
 
     @Test
     void returnsAFormToAddNewGame() throws Exception {
@@ -68,7 +63,7 @@ class ApplicationTests {
         Game game = gameRepository.save(new Game("Nintendog", "19.99", "sports"));
         mockMvc.perform(get("/games/edit/" + game.getId()))
                 .andExpect(status().isOk())
-                .andExpect(view().name("game/edit"))
+                .andExpect(view().name("games/edit"))
                 .andExpect(model().attribute("game", game))
                 .andExpect(model().attribute("title", "Edit game"));
     }

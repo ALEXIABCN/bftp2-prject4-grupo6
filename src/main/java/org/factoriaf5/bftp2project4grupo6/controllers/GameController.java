@@ -41,5 +41,12 @@ public class GameController {
         gameRepository.save(game);
         return "redirect:/games";
     }
+    @GetMapping("/games/new")
+    String getForm(Model model){
+        Game game = new Game();
+        model.addAttribute("game", game);
+        model.addAttribute("title", "Create new game");
+        return "games/edit";
+    }
 
     }
