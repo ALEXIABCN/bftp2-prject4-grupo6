@@ -58,17 +58,17 @@ class ApplicationTests {
     @Test
     void allowsToCreateANewGame() throws Exception {
         mockMvc.perform(post("/games/new")
-                        .param("title", "Wii Sports")
+                        .param("title", "Nintendog")
                         .param("price", "19,99")
                         .param("category", "sports")
                 )
-                .andExpect(status().isOk())
+                .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/games"))
         ;
 
         List<Game> existingGames = (List<Game>) gameRepository.findAll();
         assertThat(existingGames, contains(allOf(
-                hasProperty("title", equalTo("Wii Sports")),
+                hasProperty("title", equalTo("Nintendog")),
                 hasProperty("price", equalTo("19,99")),
                 hasProperty("category", equalTo("sports"))
         )));
