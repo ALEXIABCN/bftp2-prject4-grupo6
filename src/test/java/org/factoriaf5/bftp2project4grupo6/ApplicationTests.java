@@ -56,21 +56,20 @@ class ApplicationTests {
     }
 
     @Test
-    void allowsToCreateANewGame() throws Exception {
-        mockMvc.perform(post("/games/new")
-                        .param("title", "Nintendog")
-                        .param("price", "19,99")
-                        .param("category", "sports")
-                )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/games"))
-        ;
-
-        List<Game> existingGames = (List<Game>) gameRepository.findAll();
-        assertThat(existingGames, contains(allOf(
-                hasProperty("title", equalTo("Nintendog")),
-                hasProperty("price", equalTo("19,99")),
-                hasProperty("category", equalTo("sports"))
-        )));
+    void returnsAFormToAddNewGame() throws Exception {
+        mockMvc.perform(get("/games/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("games/edit"))
+                .andExpect(model().attributeExists("game"))
+                .andExpect(model().attribute("title", "Create new game"));
+    }
+    @Test
+    void returnsAFormToEditGames() throws Exception {
+        Game game = gameRepository.save(new Game("Nintendog", "19.99", "sports"));
+        mockMvc.perform(get("/games/edit/" + game.getId()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("game/edit"))
+                .andExpect(model().attribute("game", game))
+                .andExpect(model().attribute("title", "Edit game"));
     }
 }

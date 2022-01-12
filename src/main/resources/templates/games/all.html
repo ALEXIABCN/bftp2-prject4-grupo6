@@ -13,14 +13,17 @@
             <th scope="col">Title</th>
             <th scope="col">Price</th>
             <th scope="col">Category</th>
+            <th scope="col">Edit</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="game: ${games}">
             <th scope="row" th:text="${game.id}"></th>
-            <td th:text="${game.title}"></td>
-            <td th:text="${game.price}"></td>
-            <td th:text="${game.category}"></td>
+            <td th:text="${game.title}">Mark</td>
+            <td th:text="${game.price}">Mark</td>
+            <td th:text="${game.category}">Mark</td>
+            <td><a class="btn btn-success btn-sm" th:href="'/games/edit/'+${game.id}">Edit</a>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -28,3 +31,4 @@
 <footer th:replace="fragments/footer"></footer>
 </body>
 </html>
+
