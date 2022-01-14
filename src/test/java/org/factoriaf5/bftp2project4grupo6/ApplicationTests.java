@@ -10,6 +10,7 @@ import org.factoriaf5.bftp2project4grupo6.repositories.Game;
 import org.factoriaf5.bftp2project4grupo6.repositories.GameRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -66,5 +67,14 @@ class ApplicationTests {
                 .andExpect(view().name("games/edit"))
                 .andExpect(model().attribute("game", game))
                 .andExpect(model().attribute("title", "Edit game"));
+    }
+    @Test
+    void allowsToDeleteAGame() throws Exception {
+        Game game = gameRepository.save(new Game("Nintendog", "19,99", "sports"));
+        mockMvc.perform(get("/games/delete/" + game.getId()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/games"));
+
+        assertThat(gameRepository.findById(game.getId()), equalTo(Optional.empty()));
     }
 }
