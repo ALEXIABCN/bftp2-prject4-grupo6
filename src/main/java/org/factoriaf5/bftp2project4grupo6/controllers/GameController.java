@@ -29,24 +29,31 @@ public class GameController {
         model.addAttribute("games", games);
         return "games/all";
     }
+
     @GetMapping("/games/edit/{id}")
-    String editGame(Model model, @PathVariable Long id){
+    String editGame(Model model, @PathVariable Long id) {
         Game game = gameRepository.findById(id).get();
         model.addAttribute("game", game);
         model.addAttribute("title", "Edit game");
         return "games/edit";
     }
+
     @PostMapping("/games/new")
     String addGame(@ModelAttribute Game game) {
         gameRepository.save(game);
         return "redirect:/games";
     }
-    @GetMapping("/games/new")
-    String getForm(Model model){
+
+    @GetMapping("/games/new")  //partimos de la url que es la dirección del navegador (local host...)
+    String getForm(Model model) {
         Game game = new Game();
         model.addAttribute("game", game);
         model.addAttribute("title", "Create new game");
-        return "games/edit";
+        return "games/edit";  //le pide que enseñe el html que está dentro de la carpeta games
     }
-
+    @GetMapping("/games/delete/{id}")
+    String remove(@PathVariable Long id){  //en vez de remove, podriamos llamarlo como quisieramos deleteGame...
+        gameRepository.deleteById(id);
+        return "redirect:/games";  //al redireccionar, pedimos que nos lleve al localhost:8080/games como en la linea 44
     }
+}

@@ -24,7 +24,7 @@
             <td th:text="${game.price}">Mark</td>
             <td th:text="${game.category}">Mark</td>
             <td><a class="btn btn-success btn-sm" th:href="'/games/edit/'+${game.id}">Edit</a>
-            <td><a class="btn btn-success btn-sm btn-danger" th:href="'/games/edit/'+${game.id}">Delete</a>
+            <td><a class="btn btn-success btn-sm btn-danger" th:href="'/games/delete/'+${game.id}">Delete</a>
             </td>
         </tr>
         </tbody>
