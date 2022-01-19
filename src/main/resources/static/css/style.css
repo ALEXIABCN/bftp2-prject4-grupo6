@@ -1,0 +1,49 @@
+.game-list {
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.game {
+    width: 200px;
+    margin: 10px;
+    border: 1px solid #fcf3cf;
+    padding: 10px;
+    transition-duration: 0.2s;
+}
+
+.game:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 5px 2px 2px #fcf3cf;
+}
+
+.game .img-container {
+    width: 80%;
+    height: 145px;
+    margin: auto;
+}
+
+.game .img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: auto;
+}
+
+.game .info {
+    margin: 10px 20px;
+    font-size: small;
+}
+
+.game .buttons {
+    margin-top: 10px;
+}
+
+.game-filters {
+    list-style: none;
+}
+
+.game-filters li {
+    display: inline-block;
+    margin: 0 20px;
+}

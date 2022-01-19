@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.factoriaf5.bftp2project4grupo6.repositories.Game;
 import org.factoriaf5.bftp2project4grupo6.repositories.GameRepository;
@@ -76,5 +77,30 @@ class ApplicationTests {
                 .andExpect(redirectedUrl("/games"));
 
         assertThat(gameRepository.findById(game.getId()), equalTo(Optional.empty()));
+    }
+
+    @Test
+    void anonymousUsersCannotCreateAGame() throws Exception {
+        mockMvc.perform(post("/games/new")
+                        .param("title", "Nintendog")
+                        .param("price", "19,99")
+                        .param("category", "sports")
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("http://localhost/login"));
+    }
+
+    @Test
+    void anonymousUsersCannotEditAGame() throws Exception {
+        mockMvc.perform(get("/games/1/edit"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("http://localhost/login"));
+    }
+
+    @Test
+    void anonymousUsersCannotDeleteAGame() throws Exception {
+        mockMvc.perform(get("/games/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 }

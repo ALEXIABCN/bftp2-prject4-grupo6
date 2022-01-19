@@ -4,33 +4,37 @@
 </head>
 <body>
 <header th:replace="fragments/header"></header>
+
 <section class="container">
+
+
+
     <h1 th:text="${title}"></h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Category</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="game: ${games}">
-            <th scope="row" th:text="${game.id}"></th>
-            <td th:text="${game.title}">Mark</td>
-            <td th:text="${game.price}">Mark</td>
-            <td th:text="${game.category}">Mark</td>
-            <td><a class="btn btn-success btn-sm" th:href="'/games/edit/'+${game.id}">Edit</a>
-            <td><a class="btn btn-success btn-sm btn-danger" th:href="'/games/delete/'+${game.id}">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <ul class="gama-filters" sec:authorize="isAuthenticated()">
+        <li><a href="/games/">All</a></li>
+        <li th:each="category: ${categories}">
+            <a th:href="${'/games?category='+category.name}"
+               th:text="${category.name}">
+            </a>
+        </li>
+    </ul>
+    <div class="game-list">
+        <div class="game" th:each="game: ${games}">
+            <div class="img-container">
+                <img th:src="${game.coverImage}">
+            </div>
+            <div class="info">
+                <div th:text="${game.title}"></div>
+                <div th:text="${game.price}"></div>
+                <div th:text="${game.category}"></div>
+            </div>
+            <div class="buttons" sec:authorize="isAuthenticated()">
+                <a class="btn btn-success btn-sm" th:href="'/games/'+${game.id} + '/edit'">Edit</a>
+                <a class="btn btn-danger btn-sm" th:href="'/games/'+${game.id}+'/delete'">Delete</a>
+            </div>
+        </div>
+    </div>
 </section>
 <footer th:replace="fragments/footer"></footer>
 </body>
 </html>
-

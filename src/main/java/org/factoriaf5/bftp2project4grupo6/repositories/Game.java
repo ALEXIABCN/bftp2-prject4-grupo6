@@ -13,6 +13,7 @@ import java.util.Objects;
         private String title;
         private String price;
         private String category;
+        private String coverImage;
 
         public Game() {
 
@@ -66,6 +67,17 @@ import java.util.Objects;
             this.category = category;
         }
 
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,10 +86,9 @@ import java.util.Objects;
         return Objects.equals(id, game.id) && Objects.equals(title, game.title) && Objects.equals(price, game.price) && Objects.equals(category, game.category);
     }
 
+
     @Override
-        public int hashCode() {
-            return Objects.hash(id, title, price, category);
-        }
+    public int hashCode() {
+        return Objects.hash(id, title, price, category, coverImage);
     }
-
-
+   }
