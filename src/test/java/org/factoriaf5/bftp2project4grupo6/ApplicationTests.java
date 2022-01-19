@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.factoriaf5.bftp2project4grupo6.repositories.Game;
@@ -23,24 +24,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class ApplicationTests {
 
+    @Autowired
+    MockMvc mockMvc;
+
+    @Autowired
+    GameRepository gameRepository;
+
     @BeforeEach
     void setUp() {
         gameRepository.deleteAll();
     }
 
-    @Autowired
-    MockMvc mockMvc;
 
     @Test
+    @WithMockUser
     void loadsTheHomePage() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"));
     }
-    @Autowired
-    GameRepository gameRepository;
 
     @Test
+    @WithMockUser
     void returnsTheExistingGames() throws Exception {
 
         Game game = gameRepository.save(new Game("Call of duty", "19,99","Accion"));
@@ -53,6 +58,7 @@ class ApplicationTests {
 
 
     @Test
+    @WithMockUser
     void returnsAFormToAddNewGame() throws Exception {
         mockMvc.perform(get("/games/new"))
                 .andExpect(status().isOk())
@@ -61,6 +67,7 @@ class ApplicationTests {
                 .andExpect(model().attribute("title", "Create new game"));
     }
     @Test
+    @WithMockUser
     void returnsAFormToEditGames() throws Exception {
         Game game = gameRepository.save(new Game("Nintendog", "19.99", "sports"));
         mockMvc.perform(get("/games/edit/" + game.getId()))
@@ -70,6 +77,7 @@ class ApplicationTests {
                 .andExpect(model().attribute("title", "Edit game"));
     }
     @Test
+    @WithMockUser
     void allowsToDeleteAGame() throws Exception {
         Game game = gameRepository.save(new Game("Nintendog", "19,99", "sports"));
         mockMvc.perform(get("/games/delete/" + game.getId()))
@@ -80,6 +88,7 @@ class ApplicationTests {
     }
 
     @Test
+    @WithMockUser
     void anonymousUsersCannotCreateAGame() throws Exception {
         mockMvc.perform(post("/games/new")
                         .param("title", "Nintendog")
@@ -91,6 +100,7 @@ class ApplicationTests {
     }
 
     @Test
+    @WithMockUser
     void anonymousUsersCannotEditAGame() throws Exception {
         mockMvc.perform(get("/games/1/edit"))
                 .andExpect(status().is3xxRedirection())
@@ -98,6 +108,7 @@ class ApplicationTests {
     }
 
     @Test
+    @WithMockUser
     void anonymousUsersCannotDeleteAGame() throws Exception {
         mockMvc.perform(get("/games/1/delete"))
                 .andExpect(status().is3xxRedirection())
