@@ -1,9 +1,9 @@
-body  {
+body {
+    color: orange;
     background-image: url("http://www.fondoswiki.com/Uploads/fondoswiki.com/ImagenesGrandes/dragon-fuego-4-5.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
-
 .game-list {
     padding: 5px;
     display: flex;
