@@ -48,7 +48,7 @@ class ApplicationTests {
     @WithMockUser
     void returnsTheExistingGames() throws Exception {
 
-        Game game = gameRepository.save(new Game("Call of duty", "19,99","Accion"));
+        Game game = gameRepository.save(new Game("Call of duty", "19,99","Accion", "image png"));
 
         mockMvc.perform(get("/games"))
                 .andExpect(status().isOk())
@@ -69,7 +69,7 @@ class ApplicationTests {
     @Test
     @WithMockUser
     void returnsAFormToEditGames() throws Exception {
-        Game game = gameRepository.save(new Game("Nintendog", "19.99", "sports"));
+        Game game = gameRepository.save(new Game("Nintendog", "19.99", "sports", "image png"));
         mockMvc.perform(get("/games/edit/" + game.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("games/edit"))
@@ -79,7 +79,7 @@ class ApplicationTests {
     @Test
     @WithMockUser
     void allowsToDeleteAGame() throws Exception {
-        Game game = gameRepository.save(new Game("Nintendog", "19,99", "sports"));
+        Game game = gameRepository.save(new Game("Nintendog", "19,99", "sports", "image png"));
         mockMvc.perform(get("/games/delete/" + game.getId()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/games"));
@@ -94,6 +94,7 @@ class ApplicationTests {
                         .param("title", "Nintendog")
                         .param("price", "19,99")
                         .param("category", "sports")
+                        .param("coverImage", "image png")
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));

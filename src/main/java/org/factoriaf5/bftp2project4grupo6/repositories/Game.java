@@ -19,10 +19,11 @@ import java.util.Objects;
 
         }
 
-        public Game(String title, String price, String category) {
+        public Game(String title, String price, String category, String coverImage) {
             this.title = title;
             this.price = price;
             this.category = category;
+            this.coverImage = coverImage;
         }
 
         public Long getId() {
@@ -48,6 +49,7 @@ import java.util.Objects;
                     ", title='" + title + '\'' +
                     ", price='" + price + '\'' +
                     ", category='" + category + '\'' +
+                    ", coverImage'" + coverImage + '\'' +
                     '}';
         }
 
@@ -83,7 +85,7 @@ import java.util.Objects;
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Game game = (Game) o;
-        return Objects.equals(id, game.id) && Objects.equals(title, game.title) && Objects.equals(price, game.price) && Objects.equals(category, game.category);
+        return Objects.equals(id, game.id) && Objects.equals(title, game.title) && Objects.equals(price, game.price) && Objects.equals(category, game.category) && Objects.equals(coverImage, game.coverImage);
     }
 
 
