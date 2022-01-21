@@ -1,5 +1,5 @@
 body {
-    color: orange;
+    color: red;
     background-image: url("http://www.fondoswiki.com/Uploads/fondoswiki.com/ImagenesGrandes/dragon-fuego-4-5.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -16,6 +16,7 @@ body {
     border: 1px solid #fcf3cf;
     padding: 10px;
     transition-duration: 0.2s;
+    background-color: #ffff70;
 }
 
 .game:hover {
@@ -38,7 +39,7 @@ body {
 
 .game .info {
     margin: 10px 20px;
-    font-size: small;
+    font-size: medium;
 }
 
 .game .buttons {
