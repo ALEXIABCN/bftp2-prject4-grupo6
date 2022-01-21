@@ -11,7 +11,6 @@
 
     <h1 th:text="${title}"></h1>
     <ul class="gama-filters" sec:authorize="isAuthenticated()">
-        <li><a href="/games/">All</a></li>
         <li th:each="category: ${categories}">
             <a th:href="${'/games?category='+category.name}"
                th:text="${category.name}">
